@@ -2,10 +2,11 @@ const Blockchain = require('./Blockchain');
 const Block = require('./Block');
 
 describe("Blockchain", () => {
-    let bc;
+    let bc, bc2;
 
     beforeEach(() => {
         bc = new Blockchain();
+        bc2 = new Blockchain();
     });
 
     it('Starts with genesis block', () => {
@@ -17,7 +18,23 @@ describe("Blockchain", () => {
         bc.addBlock(data);
 
         expect(bc.chain[bc.chain.length - 1].data).toEqual(data);
-
     })
 
+    it('validates a valid chain', () => {
+        bc2.addBlock('foo');
+        expect(bc.isValidChain(bc2.chain)).toBe(true);
+    })
+
+    it('it invalidates a chain with a corrupt gesesys block', () => {
+        bc2.chain[0].data = 'Bad data';
+
+        expect(bc.isValidChain(bc2.chain)).toBe(false);
+    })
+
+    it('invalidates a corrupt chain', () => {
+        bc2.addBlock('foo');
+        bc2.chain[1].data = 'Not foo';
+
+        expect(bc.isValidChain(bc2.chain)).toBe(false)
+    })
 })
