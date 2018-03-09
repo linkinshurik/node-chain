@@ -11,14 +11,14 @@ class Block {
     toString() {
         return `Block -
             Timestamp: ${this.timestamp}
-            LastHash : ${this.lasthash}
+            LastHash : ${this.lastHash}
             Hash     : ${this.hash}
             Data     : ${this.data}
         `
     }
 
     static genesis() {
-        return new this('Genesis time', 'jnvkdjfnbk', 'hvywi5jcnx', ['some', 'valuable', 'data'])
+        return new this('Genesis time', '-----------', 'hvywi5jcnx', ['some', 'valuable', 'data'])
     }
 
     static mineBlock(lastBlock, data) {
