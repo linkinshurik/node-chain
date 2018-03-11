@@ -22,12 +22,12 @@ class Block {
     }
 
     static mineBlock(lastBlock, data) {
-        const timestamp = new Date();
+        const timestamp = + new Date();
         const lastHash = lastBlock.hash;
         const hash = Block.hash(timestamp, lastHash, data);
 
         return new this(timestamp, lastHash, hash, data);
-
+        
     }
 
     static hash(timestamp, lastHash, data) {
